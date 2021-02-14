@@ -1,0 +1,24 @@
+; polar
+(SETQ STPT (GETPOINT "/Start point: "))
+(SETQ DIST (GETDIST STPT "distance: "))
+(SETQ ANG (GETANGLE STPT "angle: "))
+(SETQ ENDPT (POLAR STPT ANG DIST))
+
+(PRINC)
+; get angle
+(SETQ ANGRET (ANGLE STPT ENDPT))
+(ANGTOS ANGRET (GETVAR "AUNITS") (GETVAR "AUPREC"))
+
+; get distance
+(SETQ STPT (GETPOINT "Start point: "))
+(SETQ ENDPT (GETPOINT STPT "End point: "))
+(PRINC)
+(SETQ DISRET (DISTANCE STPT ENDPT))
+
+; inters
+; 2line の　交点座標を取得する
+(SETQ PT1 (GETPOINT "1: "))
+(SETQ PT2 (GETPOINT PT1 "2: "))
+(SETQ PT3 (GETPOINT "3: "))
+(SETQ PT4 (GETPOINT PT3 "4: "))
+(INTERS PT1 PT2 PT3 PT4)

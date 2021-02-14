@@ -1,0 +1,25 @@
+;;; VLisp project file [V2.0] byaf saved to:[b:\kaggle\beansAf\lisp] at:[2021/1/22]
+(VLISP-PROJECT-LIST 
+  :NAME
+  byaf
+  :OWN-LIST
+  ("base" 
+    "diag"
+    "hello"
+    "laytopdf"
+    "lynda3-2"
+    "mergepdfs"
+    "public"
+    "test"
+    "to_pdf"
+  )
+  :FAS-DIRECTORY
+  nil
+  :TMP-DIRECTORY
+  nil
+  :PROJECT-KEYS
+  (:BUILD (:standard))
+  :CONTEXT-ID
+  :AUTOLISP
+)
+;;; EOF

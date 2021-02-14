@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1,shrink-to-fit=no'>
+    <link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+    <style>body {padding-top: 80px;}</style>
+    <title>Lunchmap</title>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>Login</h1>
+      <section class='common-form'>
+        {% if form.errors %}
+          <p class='error-msg'>ユーザ名もしくはパスワードが間違っています。もう一度やり直してください。</p>
+        {% endif %}
+
+        {% if next %}
+          {% if user.is_authenticated %}
+            <p class='error-msg'>あなたのアカウントでは、このページにアクセスできません。アクセス権のあるユーザでログインしてください。</p>
+          {% else %}
+            <p class='error-msg'>このページを表示するには、ログインしてください。</p>
+          {% endif %}
+        {% endif %}
+
+        <form action='{% url "login" %}' method='post'>
+          {% csrf_token %}
+          <input type='hidden' name='next' value='{{ next }}'/>
+          {{ form.as_p }}
+          <button type='submit'>Login</button>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>

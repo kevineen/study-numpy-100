@@ -1,0 +1,184 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BeansAutoFactory | Home</title>
+  
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="{% static 'googlefont/googlefont.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'AdminLTE-3.1.0-rc/docs/assets/plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="{% static 'AdminLTE-3.1.0-rc\plugins\tempusdominus-bootstrap-4\css\tempusdominus-bootstrap-4.min.css' %}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{% static 'AdminLTE-3.1.0-rc\plugins\icheck-bootstrap\icheck-bootstrap.min.css' %}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{% static 'AdminLTE-3.1.0-rc\plugins\jqvmap\jqvmap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'AdminLTE-3.1.0-rc\dist\css\adminlte.min.css' %}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{% static 'AdminLTE-3.1.0-rc\plugins\overlayScrollbars\css\OverlayScrollbars.min.css' %}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'AdminLTE-3.1.0-rc\plugins\daterangepicker\daterangepicker.css' %}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{% static 'AdminLTE-3.1.0-rc\plugins\summernote\summernote-bs4.min.css' %}">
+
+  {% block add_css %}
+  {% endblock %}
+  
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+  
+  <!-- NavBar -->
+  {% include "top_nav.html" %}
+  {% include "side_nav.html" %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  {% include "body_nav.html" %}
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        {% block content %}
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-7 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <!-- TO DO List -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="ion ion-clipboard mr-1"></i>
+                  To Do List
+                </h3>
+                <div class="card-tools">
+                  <ul class="pagination pagination-sm">
+                    <li class="page-item"><a href="" class="page-link">&laquo;</a></li>
+                    <li class="page-item"><a href="" class="page-link">1</a></li>
+                    <li class="page-item"><a href="" class="page-link">&raquo;</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <ul class="todo-list" data-widget="todo-list">
+                  <li>
+                    <!-- drag handle -->
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <!-- checkbox -->
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                      <label for="todoCheck1"></label>
+                    </div>
+                    <!-- todo text -->
+                    <span class="text">Design a nice theme</span>
+                    <!-- Emphasis label -->
+                    <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
+                    <!-- General tools such as edit or delete-->
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="handle">
+                      <i class="fas fa-ellipsis-v"></i>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </span>
+                    <div  class="icheck-primary d-inline ml-2">
+                      <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
+                      <label for="todoCheck2"></label>
+                    </div>
+                    <span class="text">Make the theme responsive</span>
+                    <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
+                    <div class="tools">
+                      <i class="fas fa-edit"></i>
+                      <i class="fas fa-trash-o"></i>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <button type="button" class="btn btn-info float-right"><i class="fas fa-plus"></i> Add item</button>
+              </div>
+            </div>
+            <!-- /.card -->
+          </section>
+          <!-- /.Left col -->
+          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+          <section class="col-lg-5 connectedSortable">
+          </section>
+          <!-- right col -->
+        </div>
+        <!-- /.row (main row) -->
+        {% endblock content %}
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  
+  <!-- /.content-wrapper -->
+  {% include "footer.html" %}
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+{% block jquery %}
+<!-- jQuery -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\jquery\jquery.min.js' %}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\jquery-ui\jquery-ui.min.js'%}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+{% endblock jquery %}
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\bootstrap\js\bootstrap.bundle.min.js'%}"></script>
+<!-- ChartJS -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\chart.js\Chart.min.js'%}"></script>
+<!-- Sparkline -->
+<!-- <script src="{% static 'AdminLTE-3.1.0-rc\plugins\sparklines\sparkline.js'%}"></script> -->
+<!-- JQVMap -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\jqvmap\jquery.vmap.min.js'%}"></script>
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\jqvmap\maps\jquery.vmap.usa.js'%}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\jquery-knob\jquery.knob.min.js'%}"></script>
+<!-- daterangepicker -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\moment\moment.min.js'%}"></script>
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\daterangepicker\daterangepicker.js'%}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.min.js'%}"></script>
+<!-- Summernote -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\summernote\summernote-bs4.min.js'%}"></script>
+<!-- overlayScrollbars -->
+<script src="{% static 'AdminLTE-3.1.0-rc\plugins\overlayScrollbars\js\jquery.overlayScrollbars.min.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'AdminLTE-3.1.0-rc\dist\js\adminlte.js'%}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'AdminLTE-3.1.0-rc\dist\js\demo.js'%}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- <script src="{% static 'AdminLTE-3.1.0-rc\dist\js\pages\dashboard.js'%}"></script> -->
+
+{% block add_js %}
+{% endblock %}
+</body>
+</html>

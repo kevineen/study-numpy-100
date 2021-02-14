@@ -1,0 +1,85 @@
+(COMMAND "-PLOT"  "Y"  "" "dwg to Pdf"
+       "Iso full bleed A3 (420.00 x 297.00 MM)" "m" "LANDSCAPE"  "N"   "W"  "-6,-6" "807,560" "1=2"  "C"
+       "y" "Designlasercolour.ctb" "Y"	"n" "n" "n" pdfName "N" "y"
+   )
+   
+   ;Szplot.lsp
+(defun C:szplot ( / x )
+	;(command "-layer" "of" "*UNDER" "of""QQ_WAKU""of""*WORK_3""of" "" "")
+	(command "_tilemode" "0")
+	(setq x(- (car (getvar"LIMMAX")) (car (getvar"LIMMIN")) ))
+	(cond
+		((< x 297)(setvar "PLOTID" "A3-1/2")) ;用紙別ADIドライバ名
+		((< x 420)(setvar "PLOTID" "A3-1/2")) ;実際に設定されていないとエラーになる
+		((< x 594)(setvar "PLOTID" "A2"))
+		(T        (setvar "PLOTID" "A1"))
+	)
+	(command "_.plot" "L" "0")(command "_.tilemode" "1")
+	;(command "-layer" "on" "*UNDER" "on""QQ_WAKU""on""*WORK_3""on" "" "")
+	(graphscr)
+
+	(if(not(member"accesory.arx"(arx)))(arxload "accesory"))
+	(command "_closeTextWnd")(arxunload "accesory")
+
+	(princ)
+)
+
+
+to pdf
+EXPORTPDF
+
+
+
+
+(setq filename (getfiled "1.pdf" "" "pdf" 1)) 
+
+
+
+(defun C:laytopdf ( / cmd )
+ (setq cmd (getvar 'cmdecho)) (setvar 'cmdecho 0)
+ (foreach Layout (layoutlist)
+
+   (command "_.-PLOT" 
+     "No"                                        ; Detailed plot configuration? [Yes/No] <No>: No
+     Layout                                      ; Enter a layout name or [?] <Layout1>:
+     ""                                          ; Enter a page setup name
+     "DWG To PDF.pc3"                            ; Enter an output device name or [?] <DWG To PDF.pc3>:
+     (strcat (getvar "DWGPREFIX") Layout ".pdf") ; Directory to save
+     "No"                                        ; save changes to page setup?
+     "YES"                                       ; proceed with plot?
+   ); command
+ ); foreach
+ (vla-put-StyleSheet(vla-get-ActiveLayout (vla-get-ActiveDocument (vlax-get-acad-object))) "monochrome.stb" )
+ (setvar 'cmdecho cmd)
+ (princ)
+); defun C:test
+
+
+open dwg1 (load "D01_外形図")(c:C:\Users\kevin\Desktop\beans\B20-0245 バイエル HC-FZ-190F\01_HARD\00_制御盤\20210115\外形図) close n
+
+
+(command "_.-export" "Pdf" "_E" "_NO" :C:\Users\kevin\Desktop\beans\B20-0245 バイエル HC-FZ-190F\01_HARD\00_制御盤\20210115\外形図\baba.pdf)
+
+
+
+
+(setq DWGDIR "C:\Users\kevin\Desktop\beans\B20-0245 バイエル HC-FZ-190F\01_HARD\00_制御盤\20210115\外形図\")
+(setq PDFDIR "C:\Users\kevin\Desktop\beans\B20-0245 バイエル HC-FZ-190F\01_HARD\00_制御盤\20210115\外形図\")
+(setq files (vl-directory-files DWGDIR "*.dwg"))
+(foreach filepath files (progn
+  (setq mydocs (vla-get-documents (vlax-get-acad-object)))
+  (setq mydoc (vla-open mydocs (strcat DWGDIR "\\" filepath)))
+  (command "_.-export" "Pdf" "_E" "_NO" (strcat PDFDIR "\\" filepath ".pdf"))
+  (vla-close mydoc)
+))
+
+
+carとは、リストのうち、一番最初の要素だけを抜き取って表示させるコマンドです
+dxfデータを抜き出す
+(entget(car(entsel "図形を選択してくれ：")))
+setqとは、(setq AAA BBB)の形で、AAAにBBBを代入
+
+dxfデータを取得する
+(mapcar 'print (entget (car (entsel))))(princ)
+
+

@@ -1,0 +1,1 @@
+ (defun c:Aisatsu () (alert "good"))

@@ -1,0 +1,7 @@
+(VL-LOAD-COM)
+(DEFUN C:VLCMDS (/) 
+  ; 半円を作る
+  (SETVAR "FILLETRAD" 5.0)
+  (VL-CMDF "FILLET" "U")
+  (PRINC)
+)

@@ -1,0 +1,107 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block add_css %}
+<link rel="stylesheet" href="{% static 'css\basic.min.css' %}">
+<link rel="stylesheet" href="{% static 'css\dropzone.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Top Page</h1>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <!-- <form action="upload/" method="POST" class="dropzone dz">
+      {% csrf_token %}
+      <div class="fallback">
+        <input name="file" type="file" multiple />
+      </div>
+    </form> -->
+    
+    <br />
+    <div class="info-box">
+      <span class="info-box-icon bg-info">O</span>
+      <div class="info-box-content">
+        <!-- <form method="post">
+          {% csrf_token %}
+          <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="button" class="btn btn-primary" name="pdf_crate">pdf加工処理：実行</button>
+          </div>
+        </form> -->
+      </div>
+    </div>
+    <form id="test" action="byaf:te" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <!-- <input id="text" type="text" name="name"> -->
+      <button type="submit">送信</button>
+    </form>
+    <div id="result">
+
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+{% endblock %}
+
+{% block add_js %}
+<script src="{% static 'js\dropzone-amd-module.min.js'%}"></script>
+<script>
+// using jQuery
+// function getCookie(name) {
+//     var cookieValue = null;
+//     if (document.cookie && document.cookie != '') {
+//         var cookies = document.cookie.split(';');
+//         for (var i = 0; i < cookies.length; i++) {
+//             var cookie = jQuery.trim(cookies[i]);
+//             // Does this cookie string begin with the name we want?
+//             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }
+// var csrftoken = getCookie('csrftoken');
+// function csrfSafeMethod(method) {
+//     // these HTTP methods do not require CSRF protection
+//     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+// }
+// $.ajaxSetup({
+//     beforeSend: function(xhr, settings) {
+//         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+//             xhr.setRequestHeader("X-CSRFToken", csrftoken);
+//         }
+//     }
+// });
+
+$("#test").submit(function(event){
+  event.preventDefault();
+  var form = $(this);
+  // alert(form.serialize())
+  $.ajax({
+    url: "http://localhost:8000/",
+    method: 'POST',
+    data: form.serialize(),
+    timeout: 10000,
+    dataType: "text",
+  })
+  .done(function(data){
+    $("#result").append("<p>" + form.serialize() + "</p>")
+    console.log(form.serialize())
+  })
+})
+</script>
+{% endblock %}

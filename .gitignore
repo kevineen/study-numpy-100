@@ -1,0 +1,9 @@
+node_modules/
+node_modules_s/
+
+.mypy_cache/
+.vscode/
+__pycache__/
+
+migrations/
+>>>>>>> b9e628baf5f524295238f94f9b3a7da9a8e3a066
